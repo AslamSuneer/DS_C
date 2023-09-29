@@ -26,7 +26,7 @@ case 2:binaryS(n,a);
 break;
 default:break;
 }
-}while(choice<3);
+}while(cho<3);
 }
 
 void linearS(int n,int a[]){
@@ -48,21 +48,21 @@ printf("Searched element is at position%d",flag);
 else{
 printf("Element is not found\n");
 }
-
+}
 void binaryS(int n,int a[])
 {
 int i,j,key,temp=0,low,high,flag=0,mid;
 for(i=0;i<n-1;i++)
 for(j=0;j<n-i-1;j++)
 {
-if(a[j]>a[j+1]
+if(a[j]>a[j+1])
 {
 temp=a[j];
 a[j]=a[j+1];
 a[j+1]=temp;
 }
 }
-printf("array is sorted as")
+printf("array is sorted as");
 for(i=0;i<n;i++)
 {
 printf("%d",a[i]);
@@ -87,5 +87,6 @@ low=mid+1;
 if(flag==0)
 printf("Element not found");
 else
-print("Element is in position%d",flag+1);
+printf("Element is in position%d",flag+1);
+}
 }
