@@ -4,9 +4,9 @@ void binaryS(int n,int a[]);
 void main()
 {
 int a[10],n,i,cho;
-printf("Enter the size of array");
+printf("Enter the size of array: ");
 scanf("%d",&n);
-printf("Enter the element of array");
+printf("Enter the element of array: ");
 for(i=0;i<n;i++)
 {
 scanf("%d",&a[i]);
@@ -43,50 +43,47 @@ break;
 }
 if(flag!=1)
 {
-printf("Searched element is at position%d",flag);
+printf("Searched element is at position %d",flag);
 }
 else{
 printf("Element is not found\n");
 }
 }
-void binaryS(int n,int a[])
-{
-int i,j,key,temp=0,low,high,flag=0,mid;
-for(i=0;i<n-1;i++)
-for(j=0;j<n-i-1;j++)
-{
-if(a[j]>a[j+1])
-{
-temp=a[j];
-a[j]=a[j+1];
-a[j+1]=temp;
-}
-}
-printf("array is sorted as");
-for(i=0;i<n;i++)
-{
-printf("%d",a[i]);
-}
-printf("\n Enter the element to search:\n");
-scanf("%d",&key);
-high=n-1,low=0;
-while(low<=high)
-{
-mid=low+high/2;
-if(a[mid]==key)
-{
-flag=1;
-break;
-}
-else if(a[mid]>key){
-high=mid-1;
-}
-else{
-low=mid+1;
-}
-if(flag==0)
-printf("Element not found");
-else
-printf("Element is in position%d",flag+1);
-}
+void binaryS(int n, int a[]) {
+int i,j,key,temp=0,low,high,flag=0  ,mid;
+ for(i=0;i<n-1;i++){
+ for(j=0;j<n-i-1;j++){
+ if (a[j]>a[j+1]){
+ temp=a[j];
+ a[j]=a[j+1];
+ a[j+1]=temp;
+    }
+   }
+ }
+printf("Array is sorted as: ");
+for (i = 0; i < n; i++) {
+    printf("%d ",a[i]);
+  }
+printf("\n");
+printf("Enter the element to search: ");
+scanf("%d", &key);
+low=0;
+high=n-1;
+while (low <= high){
+mid = (low + high) / 2;
+ if (a[mid] == key) {
+      flag = 1;
+printf("Element is at position %d\n", mid + 1);
+        break;
+        }
+ else if (a[mid]>key){
+    high = mid-1;
+     } 
+ else {
+    low=mid+1;
+        }
+    }
+   if(flag==0){
+ printf("Element not found\n");
+    }
 }
