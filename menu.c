@@ -30,18 +30,18 @@ default:break;
 }
 
 void linearS(int n,int a[]){
-int key,i,flag=1;
+int key,i,flag=-1;
 printf("Enter the element to be search: ");
 scanf("%d",&key);
 for(i=0;i<n;i++)
 {
 if(a[i]==key)
 {
-flag=i+1;
+flag=i;
 break;
 }
 }
-if(flag!=1)
+if(flag!=-1)
 {
 printf("Searched element is at position %d",flag);
 }
