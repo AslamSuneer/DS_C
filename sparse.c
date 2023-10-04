@@ -1,4 +1,5 @@
 #include <stdio.h>
+
 int main() {
     int b[10][10], b1[10][10], b2[10][10], i, j, k = 1, t = -1, m, n, p, l;
     printf("Enter the rows and columns: ");
@@ -9,6 +10,14 @@ int main() {
         for (j = 0; j < n; j++) {
             scanf("%d", &b[i][j]);
         }
+    }
+
+    printf("Original matrix is:\n");
+    for (i = 0; i < m; i++) {
+        for (j = 0; j < n; j++) {
+            printf("%d\t", b[i][j]);
+        }
+        printf("\n");
     }
 
     for (i = 0; i < m; i++) {
@@ -62,5 +71,6 @@ int main() {
     for (i = 0; i <= l; i++) {
         printf("%d\t%d\t%d\n", b2[i][0], b2[i][1], b2[i][2]);
     }
- return 0;
+
+    return 0;
 }
