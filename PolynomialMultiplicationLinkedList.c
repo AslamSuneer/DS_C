@@ -13,13 +13,16 @@ void insert(struct poly** head, int coef, int exp) {
     temp->coef = coef;
     temp->exp = exp;
     temp->link = NULL;
-    if (ptr == NULL) {
+
+    if (ptr == NULL || exp < ptr->exp) {
+        temp->link = ptr;
         (*head) = temp;
     }
     else {
-        while (ptr->link != NULL) {
+        while (ptr->link != NULL && exp > ptr->link->exp) {
             ptr = ptr->link;
         }
+        temp->link = ptr->link;
         ptr->link = temp;
     }
 }
@@ -44,12 +47,14 @@ void display(struct poly** head) {
     }
     else {
         while (ptr != NULL) {
-            printf("%dx", ptr->coef);
+            printf("%dx^", ptr->coef);
             printf("%d ", ptr->exp);
-            printf("+");
+            if (ptr->link != NULL) {
+                printf("+");
+            }
             ptr = ptr->link;
         }
-        printf("\b \n");
+        printf("\n");
     }
 }
 
@@ -58,14 +63,21 @@ void multiply(struct poly** poly1, struct poly** poly2, struct poly** result) {
     struct poly* ptr2 = (*poly2);
 
     while (ptr1 != NULL) {
+        struct poly* tempResult = NULL;
         while (ptr2 != NULL) {
             int coef = ptr1->coef * ptr2->coef;
             int exp = ptr1->exp + ptr2->exp;
-            insert(result, coef, exp);
+            insert(&tempResult, coef, exp);
             ptr2 = ptr2->link;
         }
         ptr2 = (*poly2);
         ptr1 = ptr1->link;
+
+        // Add the current temporary result to the final result
+        while (tempResult != NULL) {
+            insert(result, tempResult->coef, tempResult->exp);
+            tempResult = tempResult->link;
+        }
     }
 }
 
