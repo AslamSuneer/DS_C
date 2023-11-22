@@ -88,7 +88,7 @@ int main() {
     new_poly(&poly1);
     printf("Polynomial 1 = ");
     display(&poly1);
-
+printf("Second Polynomial \n");
     new_poly(&poly2);
     printf("Polynomial 2 = ");
     display(&poly2);
