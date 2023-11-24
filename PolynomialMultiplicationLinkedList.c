@@ -75,11 +75,40 @@ void multiply(struct poly** poly1, struct poly** poly2, struct poly** result) {
 
         // Add the current temporary result to the final result
         while (tempResult != NULL) {
-            insert(result, tempResult->coef, tempResult->exp);
-            tempResult = tempResult->link;
+            struct poly* existingTerm = *result;
+            while (existingTerm != NULL && existingTerm->exp != tempResult->exp) {
+                existingTerm = existingTerm->link;
+            }
+            if (existingTerm != NULL) {
+                // Matching exponent found
+                if (existingTerm->coef * tempResult->coef < 0) {
+                    // Cancel out terms with opposite signs
+                    existingTerm->coef += tempResult->coef;
+                    if (existingTerm->coef == 0) {
+                        // Remove canceled term
+                        if (existingTerm->link != NULL) {
+                            existingTerm->link = existingTerm->link->link;
+                        } else {
+                            *result = NULL;
+                        }
+                        free(tempResult);
+                    }
+                } else {
+                    // Add terms with the same sign
+                    existingTerm->coef += tempResult->coef;
+                    free(tempResult);
+                }
+            } else {
+                // No matching exponent found, add the term to the result
+                insert(result, tempResult->coef, tempResult->exp);
+                struct poly* temp = tempResult;
+                tempResult = tempResult->link;
+                free(temp);
+            }
         }
     }
 }
+
 
 int main() {
     struct poly* poly1 = NULL, * poly2 = NULL, * poly3 = NULL;
